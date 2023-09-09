@@ -1,49 +1,55 @@
 
-test_cases = int(input())
+def add_item(inventory, item_name, quantity):
+    if item_name in inventory:
+        inventory[item_name] += quantity
+        print(f"UPDATED Item {item_name}")
+    else:
+        inventory[item_name] = quantity
+        print(f"ADDED Item {item_name}")
 
-items = []
-qty = []
-def formula(func,name,quantity):
-    if (name not in items) and func=='ADD':
-        items.append(itm)
-        qty.append(quantity)
-        print('Added Item '+name)
-    elif (name in items) and func=='ADD':
 
-        qty[items.index(itm)] += qt
-        print('Added Item '+name)
-
-    elif(name in items)and func=='DELETE':
-        if(qty[items.index(name)] >= quantity):
-            qty[items.index(name)]-=quantity
-            print('Deleted Item '+name)
+def delete_item(inventory, item_name, quantity):
+    if item_name not in inventory:
+        print(f"Item {item_name} does not exist")
+    else:
+        if inventory[item_name] < quantity:
+            print(f"Item {item_name} could not be DELETED")
         else:
-            print('Item '+name+' could not be DELETED')
+            inventory[item_name] -= quantity
+            print(f"DELETED Item {item_name}")
 
 
-for k in range(0,test_cases):
-    n = int(input())
-    for j in range(0,n):
-        itm,qt = input().split(' ')
-        qt = int(qt)
-        items.append(itm)
-        qty.append(qt)
-        #items.append(itms)
+def calculate_total_quantity(inventory):
+    total_quantity = sum(inventory.values())
+    print("Total Items in Inventory:")
+    print(total_quantity)
 
 
-    fun = int(input())
-    for i in range(0,fun):
-        function,names,quantit = input().split(' ')
-        quantit = int(quantit)
-        formula(function,names,quantit)
+def main():
+    T = int(input())  
 
+    for _ in range(T):
+        N = int(input())  
+        inventory = {}  
 
+        
+        for _ in range(N):
+            item_name, item_quantity = input().split()
+            inventory[item_name] = int(item_quantity)
 
-sum = 0
-for quantities  in qty:
-    sum+=quantities
-print('Total Items in Inventory:',end=' ')
-print(sum)
+        M = int(input()) 
 
+        
+        for _ in range(M):
+            operation, item_name, quantity = input().split()
+            quantity = int(quantity)
+            
+            if operation == "ADD":
+                add_item(inventory, item_name, quantity)
+            elif operation == "DELETE":
+                delete_item(inventory, item_name, quantity)
 
+        calculate_total_quantity(inventory)
 
+if __name__ == "__main__":
+    main()
