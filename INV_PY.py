@@ -7,18 +7,18 @@ def formula(func,name,quantity):
     if (name not in items) and func=='ADD':
         items.append(itm)
         qty.append(quantity)
-        print('Added item '+name)
+        print('Added Item '+name)
     elif (name in items) and func=='ADD':
 
         qty[items.index(itm)] += qt
-        print('Added item '+name)
+        print('Added Item '+name)
 
     elif(name in items)and func=='DELETE':
         if(qty[items.index(name)] >= quantity):
             qty[items.index(name)]-=quantity
-            print('Deleted item '+name)
+            print('Deleted Item '+name)
         else:
-            print('Item'+name+' couldnt be deleted')
+            print('Item '+name+' could not be DELETED')
 
 
 for k in range(0,test_cases):
@@ -42,7 +42,7 @@ for k in range(0,test_cases):
 sum = 0
 for quantities  in qty:
     sum+=quantities
-print('The total item are: ',end=' ')
+print('Total Items in Inventory:',end=' ')
 print(sum)
 
 
